@@ -71,147 +71,265 @@ One note before you delve into your tasks: for each endpoint, you are expected t
 
 You will need to provide detailed documentation of your API endpoints including the URL, request parameters, and the response body. Use the example below as a reference.
 
-### Documentation Example
+### API Documentation 
 
-`GET '/api/v1.0/categories'`
 
-GET `\categories` 
-Fetches a dictionary of all available categories
-- *Request parameters:* none 
-- *Example response:*  
+GET `/categories` 
+To get a dictionary of all  categories you need :
+-Curl link: "curl http://127.0.0.1:5000/categories"
+- Response:  
 ```
 {
   "categories": {
-    "1": "Science", 
-    "2": "Art", 
-    "3": "Geography", 
-    "4": "History", 
-    "5": "Entertainment", 
+    "1": "Science",
+    "2": "Art",
+    "3": "Geography",
+    "4": "History",
+    "5": "Entertainment",
     "6": "Sports"
-  }, 
+  },
   "success": true
 }
 
 ```
 
 
-GET `\questions?page=<page_number>` 
-Fetches a paginated dictionary of questions of all available categories
-- *Request parameters (optional):* page:int 
-- *Example response:*  
+GET `/questions` 
+To retrieve a dictionary of questions from all categories.
+- Curl link: "curl http://127.0.0.1:5000/questions"
+- Response:  
  ``` {
   "categories": {
-    "1": "Science", 
-    "2": "Art", 
-    "3": "Geography", 
-    "4": "History", 
-    "5": "Entertainment", 
+    "1": "Science",
+    "2": "Art",
+    "3": "Geography",
+    "4": "History",
+    "5": "Entertainment",
     "6": "Sports"
-  }, 
-  "current_category": null, 
+  },
+  "current_category": null,
   "questions": [
     {
-      "answer": "Maya Angelou", 
-      "category": 4, 
-      "difficulty": 2, 
-      "id": 5, 
-      "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
-    },  
+      "answer": "Apollo 13",
+      "category": 5,
+      "difficulty": 4,
+      "id": 2,
+      "question": "What movie earned Tom Hanks his third straight Oscar nomination, in 1996?"
+    },
     {
-      "answer": "Escher", 
-      "category": 2, 
-      "difficulty": 1, 
-      "id": 16, 
-      "question": "Which Dutch graphic artist\u2013initials M C was a creator of optical illusions?"
+      "answer": "Tom Cruise",
+      "category": 5,
+      "difficulty": 4,
+      "id": 4,
+      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
+    },
+    {
+      "answer": "Maya Angelou",
+      "category": 4,
+      "difficulty": 2,
+      "id": 5,
+      "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
+    },
+    {
+      "answer": "Edward Scissorhands",
+      "category": 5,
+      "difficulty": 3,
+      "id": 6,
+      "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
+    },
+    {
+      "answer": "Muhammad Ali",
+      "category": 4,
+      "difficulty": 1,
+      "id": 9,
+      "question": "What boxer's original name is Cassius Clay?"
+    },
+    {
+      "answer": "Brazil",
+      "category": 6,
+      "difficulty": 3,
+      "id": 10,
+      "question": "Which is the only team to play in every soccer World Cup tournament?"
+    },
+    {
+      "answer": "Uruguay",
+      "category": 6,
+      "difficulty": 4,
+      "id": 11,
+      "question": "Which country won the first ever soccer World Cup in 1930?"
+    },
+    {
+      "answer": "George Washington Carver",
+      "category": 4,
+      "difficulty": 2,
+      "id": 12,
+      "question": "Who invented Peanut Butter?"
+    },
+    {
+      "answer": "Lake Victoria",
+      "category": 3,
+      "difficulty": 2,
+      "id": 13,
+      "question": "What is the largest lake in Africa?"
+    },
+    {
+      "answer": "The Palace of Versailles",
+      "category": 3,
+      "difficulty": 3,
+      "id": 14,
+      "question": "In which royal palace would you find the Hall of Mirrors?"
     }
-  ], 
-  "success": true, 
-  "total_questions": 2
-}
+  ],
+  "success": true,
+  "total_questions": 19
 ```
 
+
 DELETE `/questions/<question_id>`
-Delete an existing questions from the repository of available questions
-- *Request arguments:* question_id:int 
-- *Example response:* 
+
+To delete an existing question from its id 
+- Curl Link: "curl -X DELETE  'http://localhost:5000/questions/2'"
+
+- Response:
 ```
 {
-  "deleted": "28", 
+  "deleted": "2",
   "success": true
 }
 ```
 
 POST `/questions`
-Add a new question to the repository of available questions
-- *Request body:* {question:string, answer:string, difficulty:int, category:string}
-- *Example response:* 
-```
+To add a new question to the list of existing questions
+- Curl Link: "curl -X POST -H "Content-Type: application/json" -d '{"question":"What is my level in Full stack", "answer":"I m web developper junior", "category":"3", "difficulty":"5"}' http://127.0.0.1:5000/questions"
+- Response:
 {
-  "created": 29, 
+  "created": 24,
   "success": true
 }
-```
+
 POST `/questions/search`
-Fetches all questions where a substring matches the search term (not case-sensitive)
-- *Request body:* {searchTerm:string}
-- *Example response:*
+To Retrieve all the questions whose letter or string of characters match the search term 
+- Curl Link:  "curl http://127.0.0.1:5000/search -X POST -H "Content-Type: application/json" -d '{"searchTerm":"What"}'"
+- Response:
 ```
 {
-  "current_category": null, 
   "questions": [
     {
-      "answer": "Lisbon", 
-      "category": 2, 
-      "difficulty": 1, 
-      "id": 29, 
-      "question": "What is the capital of Portugal?"
+      "answer": "Muhammad Ali",
+      "category": 4,
+      "difficulty": 1,
+      "id": 9,
+      "question": "What boxer's original name is Cassius Clay?"
+    },
+    {
+      "answer": "Tom Cruise",
+      "category": 5,
+      "difficulty": 4,
+      "id": 4,
+      "question": "What actor did author Anne Rice first denounce, then praise in the role of her beloved Lestat?"
+    },
+    {
+      "answer": "Edward Scissorhands",
+      "category": 5,
+      "difficulty": 3,
+      "id": 6,
+      "question": "What was the title of the 1990 fantasy directed by Tim Burton about a young man with multi-bladed appendages?"
+    },
+    {
+      "answer": "Lake Victoria",
+      "category": 3,
+      "difficulty": 2,
+      "id": 13,
+      "question": "What is the largest lake in Africa?"
+    },
+    {
+      "answer": "Mona Lisa",
+      "category": 2,
+      "difficulty": 3,
+      "id": 17,
+      "question": "La Giaconda is better known as what?"
+    },
+    {
+      "answer": "The Liver",
+      "category": 1,
+      "difficulty": 4,
+      "id": 20,
+      "question": "What is the heaviest organ in the human body?"
+    },
+    {
+      "answer": "Blood",
+      "category": 1,
+      "difficulty": 4,
+      "id": 22,
+      "question": "Hematology is a branch of medicine involving the study of what?"
+    },
+    {
+      "answer": "I m web developper junior",
+      "category": 3,
+      "difficulty": 5,
+      "id": 24,
+      "question": "What is my level in Full stack"
     }
-  ], 
-  "success": true, 
-  "total_questions": 1
+  ],
+  "success": true,
+  "total_questions": 8
 }
 ```
 
 GET `/categories/<int:category_id>/questions`
-Fetches a dictionary of questions for the specified category
-- *Request argument:* category_id:int
-- *Example response:*
+To retrieve a question dictionary by the submitted category id
+- Curl Link: "curl http://127.0.0.1:5000/categories/3/questions"
+- Response:
 ```
 {
-  "current_category": 1, 
+  "current_category": 3,
   "questions": [
     {
-      "answer": "The Liver", 
-      "category": 1, 
-      "difficulty": 4, 
-      "id": 20, 
-      "question": "What is the heaviest organ in the human body?"
-    }, 
+      "answer": "Lake Victoria",
+      "category": 3,
+      "difficulty": 2,
+      "id": 13,
+      "question": "What is the largest lake in Africa?"
+    },
     {
-      "answer": "Alexander Fleming", 
-      "category": 1, 
-      "difficulty": 3, 
-      "id": 21, 
-      "question": "Who discovered penicillin?"
-    }, 
-  ], 
-  "success": true, 
-  "total_questions": 2
+      "answer": "The Palace of Versailles",
+      "category": 3,
+      "difficulty": 3,
+      "id": 14,
+      "question": "In which royal palace would you find the Hall of Mirrors?"
+    },
+    {
+      "answer": "Agra",
+      "category": 3,
+      "difficulty": 2,
+      "id": 15,
+      "question": "The Taj Mahal is located in which Indian city?"
+    },
+    {
+      "answer": "I m web developper junior",
+      "category": 3,
+      "difficulty": 5,
+      "id": 24,
+      "question": "What is my level in Full stack"
+    }
+  ],
+  "success": true,
+  "total_questions": 4
 }
 ```
 POST `/quizzes`
-Fetches one random question within a specified category. Previously asked questions are not asked again. 
-- *Request body:* {previous_questions: arr, quiz_category: {id:int, type:string}}
-- *Example response*: 
+To get a random question in a specified category. 
+-Curl link: "curl http://127.0.0.1:5000/quizzes -X POST -H "Content-Type: application/json" -d '{"quiz_category":{"type":"Geography","id":"3"}, "previous_questions":[10]}'"
+- Response: 
 ```
 {
   "question": {
-    "answer": "The Liver", 
-    "category": 1, 
-    "difficulty": 4, 
-    "id": 20, 
-    "question": "What is the heaviest organ in the human body?"
-  }, 
+    "answer": "I m web developper junior",
+    "category": 3,
+    "difficulty": 5,
+    "id": 24,
+    "question": "What is my level in Full stack"
+  },
   "success": true
 }
 ```

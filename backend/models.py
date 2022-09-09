@@ -4,12 +4,12 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 
 database_name = 'trivia'
-database_path = 'postgresql://{}:{}@{}/{}'.format(
-    'postgres',
-    'eudo',
-    'localhost:5432',
-    database_name
-    )
+database_path = 'postgres://{}:{}@{}/{}'.format(
+'postgres',
+'eudo',
+'localhost:5432',
+database_name
+)
 
 db = SQLAlchemy()
 
@@ -30,7 +30,6 @@ Question
 """
 class Question(db.Model):
     __tablename__ = 'questions'
-
     id = Column(Integer, primary_key=True)
     question = Column(String)
     answer = Column(String)
