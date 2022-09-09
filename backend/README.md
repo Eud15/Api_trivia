@@ -1,4 +1,4 @@
-# Backend - Trivia API
+# Backend - Trivia API and API Documentation
 
 ## Setting up the Backend
 
